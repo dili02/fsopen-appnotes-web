@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import noteService from "./services/notes";
 import Note from "./components/Note";
 
-function App(props) {
-  const [notes, setNotes] = useState(props.notes);
+function App() {
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
 
+  useEffect(() => {
+    noteService.getAll().then((initialNotes) => {
+      setNotes(initialNotes);
+    });
+  }, []);
+
   const addNote = (event) => {
     event.preventDefault();
+
     const noteObject = {
       content: newNote,
       date: new Date().toISOString(),
@@ -15,11 +23,29 @@ function App(props) {
       id: notes.length + 1,
     };
 
-    setNotes(notes.concat(noteObject));
-    setNewNote("");
+    noteService.create(noteObject).then((returnedNote) => {
+      setNotes(notes.concat(returnedNote));
+      setNewNote("");
+    });
   };
 
   const handleNoteChange = (event) => setNewNote(event.target.value);
+
+  const toggleImportanceOf = (id) => {
+    const note = notes.find((n) => n.id === id);
+    const changedNote = { ...note, important: !note.important };
+
+    noteService
+      .update(id, changedNote)
+      .then((returnedNote) => {
+        setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(`the note '${note.content}' was already deleted from server`);
+        setNotes(notes.filter((n) => n.id !== id));
+      });
+  };
 
   const notesToShow = showAll
     ? notes
@@ -42,7 +68,13 @@ function App(props) {
 
       <ul>
         {notesToShow.map((note) => (
-          <Note key={note.id} content={note.content} date={note.date} />
+          <Note
+            key={note.id}
+            content={note.content}
+            date={note.date}
+            importance={note.important}
+            toggleImportance={() => toggleImportanceOf(note.id)}
+          />
         ))}
       </ul>
     </div>

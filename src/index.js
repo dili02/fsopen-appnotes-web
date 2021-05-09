@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-const notes = [
+/* const notes = [
   {
     id: 1,
     content: "HTML is easy",
@@ -22,6 +22,6 @@ const notes = [
     date: "2019-05-30T19:20:14.298Z",
     important: true,
   },
-];
+]; */
 
-ReactDOM.render(<App notes={notes} />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));

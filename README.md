@@ -4,3 +4,4 @@ App proposed by the program [Full Stack Open](https://fullstackopen.com/en) by t
 ## Completed Parts
 **Part 0** - Fundamentals of Web apps <br>
 **Part 1** - Introduction to React <br>
+**Part 2** - Communicating with server <br>
