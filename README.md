@@ -12,3 +12,4 @@ we will take a look at how to render a data collection, like a list of names, to
 ## Part 5 Testing React app
 In this part we return to the frontend, first looking at different possibilities for testing the React code. We will also implement token based authentication which will enable users to log in to our application.<br>
 **a** - Login in frontend <br>
+**b** - props.children and prop-types <br>
