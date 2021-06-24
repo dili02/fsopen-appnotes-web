@@ -14,3 +14,5 @@ In this part we return to the frontend, first looking at different possibilities
 **a** - Login in frontend <br>
 **b** - props.children and prop-types <br>
 **c** - Testing React Apps <br>
+**d** - End to End testing \*(Cypress)\*<br>
+

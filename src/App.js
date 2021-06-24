@@ -111,7 +111,7 @@ function App() {
 
   const noteForm = () => (
     <Togglable
-      buttonLabel='new note'
+      buttonLabel='create note'
       ref={noteFormRef}
     >
       <NoteForm createNote={addNote} />
